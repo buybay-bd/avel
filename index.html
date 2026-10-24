@@ -24,7 +24,7 @@ nav{display:flex;gap:26px;font-size:12px;letter-spacing:.14em}nav a:hover,nav a.
 .btn:hover{background:transparent;color:var(--tx)}.btn.o{background:transparent;color:var(--tx)}.btn.o:hover{background:var(--tx);color:var(--bg)}
 .btn.w{background:#fff;color:#000;border-color:#fff}.btn.w:hover{background:transparent;color:#fff}.btn.w.o{background:transparent;color:#fff}.btn.w.o:hover{background:#fff;color:#000}
 .btn[disabled]{opacity:.4;pointer-events:none}.full{width:100%;text-align:center}
-.hero{position:relative;min-height:78vh;background:#000;color:#fff;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.hero{position:relative;min-height:64vh;background:#000;color:#fff;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
 .hero .ph{display:grid;place-items:center;background:#1d1d1d}.hero .ph:nth-child(2){background:#2a2a2a}.hero svg{width:min(70%,340px);opacity:.9}
 .hero .tx{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:56px 6vw}
 .hero h1{font-size:clamp(72px,14vw,190px);letter-spacing:.2em;line-height:.9;margin-left:-.05em}
@@ -81,6 +81,7 @@ footer .logo{padding:0;font-size:40px}.nl{display:flex;gap:0;margin-top:18px;max
 .scroll{overflow-x:auto}
 @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.shop,.pd,.co,.split{grid-template-columns:1fr}.fg{grid-template-columns:1fr 1fr}.filt{display:none}.filt.open{display:block}.menu{display:block}header{grid-template-columns:auto 1fr auto;padding:0 8px}.logo{text-align:center;font-size:28px}nav{display:none}nav.open{display:flex;position:absolute;top:68px;left:0;right:0;background:var(--bg);flex-direction:column;padding:20px 24px;border-bottom:1px solid var(--bd);gap:18px}.hero{grid-template-columns:1fr}.hero .ph:nth-child(2){display:none}.tiles{grid-template-columns:1fr}.ic .hs{display:none}.gal{grid-template-columns:1fr}.gal .th{flex-direction:row;order:2}.gal .th button{width:64px}.split>div:first-child{min-height:380px}}
 @media(min-width:901px){#ftog{display:none}}
+@media(max-width:900px){.hero{min-height:0}.hero .tx{position:relative;inset:auto;padding:96px 6vw 56px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
 <div class="bar" id="bar"><div id="bt">INTRODUCING AVEL — LESS, BUT BETTER.</div></div>
