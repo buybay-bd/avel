@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" style="color-scheme: dark;"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AVEL — Less, But Better</title>
+<meta name="description" content="AVEL is a modern unisex clothing brand from Bangladesh. Clothing for a Better You.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--alt:#F7F6F3;--tx:#111;--mu:#777;--bd:#E5E5E5;--inv:#000;--invtx:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c0c0c;--alt:#161616;--tx:#f2f2f0;--mu:#9a9a9a;--bd:#2a2a2a;--inv:#f2f2f0;--invtx:#000}}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.6 Inter,system-ui,sans-serif;min-height:100%}
+h1,h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;margin:0}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--tx);outline-offset:2px}
+.bar{background:var(--inv);color:var(--invtx);text-align:center;font-size:11px;letter-spacing:.2em;padding:8px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--bd);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;height:68px}
+nav{display:flex;gap:26px;font-size:12px;letter-spacing:.14em}nav a:hover,nav a.on{text-decoration:underline;text-underline-offset:6px}
+.logo{font:500 36px "Cormorant Garamond",serif;letter-spacing:.32em;padding-left:.32em}
+.ic{display:flex;justify-content:flex-end;gap:6px}.ic button{background:none;border:0;padding:8px;position:relative;display:grid;place-items:center}
+.ic svg,.menu svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5}
+.cnt{position:absolute;top:0;right:0;background:var(--inv);color:var(--invtx);font-size:10px;min-width:16px;height:16px;border-radius:8px;display:grid;place-items:center}
+.menu{display:none;background:none;border:0;padding:8px}
+.btn{display:inline-block;border:1px solid var(--tx);background:var(--tx);color:var(--bg);padding:14px 30px;font-size:12px;letter-spacing:.18em;transition:.25s}
+.btn:hover{background:transparent;color:var(--tx)}.btn.o{background:transparent;color:var(--tx)}.btn.o:hover{background:var(--tx);color:var(--bg)}
+.btn.w{background:#fff;color:#000;border-color:#fff}.btn.w:hover{background:transparent;color:#fff}.btn.w.o{background:transparent;color:#fff}.btn.w.o:hover{background:#fff;color:#000}
+.btn[disabled]{opacity:.4;pointer-events:none}.full{width:100%;text-align:center}
+.hero{position:relative;min-height:78vh;background:#000;color:#fff;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.hero .ph{display:grid;place-items:center;background:#1d1d1d}.hero .ph:nth-child(2){background:#2a2a2a}.hero svg{width:min(70%,340px);opacity:.9}
+.hero .tx{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:56px 6vw}
+.hero h1{font-size:clamp(72px,14vw,190px);letter-spacing:.2em;line-height:.9;margin-left:-.05em}
+.hero p{margin:14px 0 0;max-width:420px;color:#ddd}.hero .tag{font:italic 500 26px "Cormorant Garamond",serif;margin-top:8px}.hero .row{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.note{font-size:11px;color:var(--mu);padding:10px 24px;background:var(--alt);text-align:center}
+section{padding:80px 24px;max-width:1400px;margin:auto}h2.big{font-size:clamp(34px,5vw,60px);line-height:1.05}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tile{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--alt);display:block}
+.tile>div{position:absolute;inset:0;transition:transform .8s}.tile:hover>div{transform:scale(1.05)}
+.tile span{position:absolute;left:22px;bottom:18px;color:#fff;font:500 34px "Cormorant Garamond",serif;letter-spacing:.2em}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 14px}
+.card{position:relative}.card .im{display:block;aspect-ratio:4/5;background:var(--alt);overflow:hidden;position:relative}
+.card .im svg,.gal svg{width:100%;height:100%;display:block}
+.lbl{position:absolute;top:10px;left:10px;background:var(--bg);font-size:10px;letter-spacing:.16em;padding:3px 8px}
+.wish{position:absolute;top:6px;right:6px;background:none;border:0;padding:8px;z-index:2}.wish svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5}.wish.on svg{fill:currentColor}
+.qa{position:absolute;left:10px;right:10px;bottom:10px;background:var(--bg);border:1px solid var(--tx);padding:9px;font-size:11px;letter-spacing:.16em;text-align:center;opacity:0;transform:translateY(6px);transition:.25s}
+.card:hover .qa,.card:focus-within .qa{opacity:1;transform:none}
+@media(hover:none){.qa{opacity:1;transform:none}}
+.card h3{font:500 14px Inter;margin:12px 0 2px}.pr{font-size:13px}.pr s{color:var(--mu);margin-left:6px}
+.sw{display:flex;gap:6px;margin:6px 0;align-items:center}.dot{width:14px;height:14px;border-radius:50%;border:1px solid var(--bd);display:inline-block}
+.sz{font-size:11px;color:var(--mu);letter-spacing:.06em}
+.split{display:grid;grid-template-columns:1fr 1fr;background:var(--alt);max-width:none;padding:0}.split>div{min-height:520px}.split .t{display:flex;flex-direction:column;justify-content:center;gap:22px;padding:6vw;align-items:flex-start}.split p{max-width:440px;color:var(--mu);font-size:15px;margin:0}
+.camp{max-width:none;background:#1a1a1a;color:#fff;text-align:center;padding:110px 24px;display:flex;flex-direction:column;align-items:center;gap:20px}.camp p{margin:0;color:#ccc}
+.pagehead{padding:56px 24px 28px;max-width:1400px;margin:auto}.pagehead p{color:var(--mu);max-width:520px;margin:10px 0 0}
+.tools{max-width:1400px;margin:auto;padding:0 24px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--bd)}
+select,input,textarea{font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);padding:11px 12px;border-radius:0;width:100%}
+.tools select{width:auto}.shop{max-width:1400px;margin:auto;padding:24px;display:grid;grid-template-columns:220px 1fr;gap:36px}
+.filt h4{font:500 11px Inter;letter-spacing:.16em;margin:0 0 10px}.filt fieldset{border:0;padding:0;margin:0 0 24px;display:flex;flex-wrap:wrap;gap:8px}.filt label{display:flex;gap:8px;align-items:center;font-size:13px;width:100%}.filt input{width:auto}
+.chip{border:1px solid var(--bd);background:none;min-width:44px;padding:9px 12px;font-size:12px;position:relative}.chip.on{border-color:var(--tx);background:var(--tx);color:var(--bg)}.chip[disabled]{color:var(--mu);text-decoration:line-through;cursor:not-allowed;background:none}
+.chip.c{padding:0;width:34px;height:34px;min-width:0;border-radius:50%}.chip.c.on{outline:2px solid var(--tx);outline-offset:2px;border-color:var(--bd)}
+.pd{max-width:1300px;margin:auto;padding:32px 24px 60px;display:grid;grid-template-columns:1.2fr 1fr;gap:56px}
+.gal{display:grid;grid-template-columns:72px 1fr;gap:12px}.gal .th{display:flex;flex-direction:column;gap:8px}.gal .th button{padding:0;border:1px solid var(--bd);background:var(--alt);aspect-ratio:4/5}.gal .th button.on{border-color:var(--tx)}.gal .main{background:var(--alt);aspect-ratio:4/5}
+.pd h1{font-size:44px;margin:6px 0}.pd .lab{font-size:11px;letter-spacing:.16em;margin:22px 0 8px;display:flex;justify-content:space-between}.pd .lab button{background:none;border:0;text-decoration:underline;font-size:12px;letter-spacing:0;padding:0}
+.qty{display:inline-flex;border:1px solid var(--bd)}.qty button{width:40px;height:40px;background:none;border:0;font-size:16px}.qty span{width:40px;display:grid;place-items:center}
+details{border-top:1px solid var(--bd);padding:14px 0}details:last-of-type{border-bottom:1px solid var(--bd)}summary{cursor:pointer;font-size:12px;letter-spacing:.14em}details p{color:var(--mu);margin:10px 0 0}
+.err{color:#b3261e;font-size:12px;min-height:18px;margin:8px 0}
+.panel{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.45);display:none}.panel.open{display:block}
+.panel>div{position:absolute;right:0;top:0;bottom:0;width:min(440px,100%);background:var(--bg);padding:24px;overflow:auto}
+.panel.s>div{width:100%;height:auto;bottom:auto;padding:28px 24px}
+.pclose{float:right;background:none;border:0;font-size:22px}
+.line{display:grid;grid-template-columns:80px 1fr auto;gap:14px;padding:16px 0;border-bottom:1px solid var(--bd)}.line .th{aspect-ratio:4/5;background:var(--alt)}
+.sum div{display:flex;justify-content:space-between;padding:5px 0}.sum .tot{font-weight:500;border-top:1px solid var(--bd);margin-top:8px;padding-top:12px;font-size:16px}
+.co{max-width:1100px;margin:auto;padding:48px 24px;display:grid;grid-template-columns:1.3fr 1fr;gap:48px}
+.f{display:grid;gap:14px;grid-template-columns:1fr 1fr}.f .w{grid-column:1/-1}.f label{font-size:12px;display:grid;gap:5px;letter-spacing:.04em}.f .bad{border-color:#b3261e}
+.pay{display:grid;gap:8px;margin:14px 0}.pay label{display:flex;gap:10px;align-items:center;border:1px solid var(--bd);padding:12px;font-size:13px}.pay input{width:auto}.pay small{color:var(--mu);margin-left:auto}
+.demo{background:var(--alt);border-left:3px solid var(--tx);padding:12px 14px;font-size:12px;margin:16px 0}
+.empty{text-align:center;padding:90px 24px;color:var(--mu)}.empty h2{color:var(--tx);margin-bottom:12px}
+footer{background:#000;color:#fff;padding:70px 24px 28px;margin-top:40px}.fg{max-width:1400px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}
+footer h4{font:500 11px Inter;letter-spacing:.18em;margin:0 0 14px;color:#aaa}footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}footer a{color:#ddd;font-size:13px}footer a:hover{text-decoration:underline}
+footer .logo{padding:0;font-size:40px}.nl{display:flex;gap:0;margin-top:18px;max-width:340px}.nl input{background:#111;border-color:#333;color:#fff}.nl button{background:#fff;color:#000;border:0;padding:0 16px;font-size:11px;letter-spacing:.14em}
+.copy{max-width:1400px;margin:44px auto 0;border-top:1px solid #222;padding-top:20px;font-size:12px;color:#888;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:12px 20px;font-size:13px;z-index:60;opacity:0;pointer-events:none;transition:.3s}.toast.on{opacity:1}
+.sr{position:absolute;left:-9999px}
+.scroll{overflow-x:auto}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.shop,.pd,.co,.split{grid-template-columns:1fr}.fg{grid-template-columns:1fr 1fr}.filt{display:none}.filt.open{display:block}.menu{display:block}header{grid-template-columns:auto 1fr auto;padding:0 8px}.logo{text-align:center;font-size:28px}nav{display:none}nav.open{display:flex;position:absolute;top:68px;left:0;right:0;background:var(--bg);flex-direction:column;padding:20px 24px;border-bottom:1px solid var(--bd);gap:18px}.hero{grid-template-columns:1fr}.hero .ph:nth-child(2){display:none}.tiles{grid-template-columns:1fr}.ic .hs{display:none}.gal{grid-template-columns:1fr}.gal .th{flex-direction:row;order:2}.gal .th button{width:64px}.split>div:first-child{min-height:380px}}
+@media(min-width:901px){#ftog{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="bar" id="bar"><div id="bt">INTRODUCING AVEL — LESS, BUT BETTER.</div></div>
+<header>
+<button class="menu" id="mt" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"></path></svg></button>
+<nav id="nav" aria-label="Main" class=""><a href="#new">NEW ARRIVALS</a><a href="#men">MEN</a><a href="#women">WOMEN</a><a href="#all">COLLECTIONS</a></nav>
+<a class="logo" href="#home" aria-label="AVEL home">AVEL</a>
+<div class="ic">
+<button id="bs" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></button>
+<button id="ba" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1-5 15-5 16 0"></path></svg></button>
+<button class="hs" id="bw" aria-label="Wishlist"><svg viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.5 4.5 0 018-2.5A4.5 4.5 0 0120 9c0 6-8 11-8 11z"></path></svg><span class="cnt" id="wc">0</span></button>
+<button id="bb" aria-label="Shopping bag"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 016 0v2"></path></svg><span class="cnt" id="cc">0</span></button>
+</div></header>
+<main id="app" tabindex="-1"></main>
+<footer><div class="fg">
+<div><div class="logo">AVEL</div><p class="serif" style="font-size:22px;font-style:italic;margin:10px 0">Less, But Better.</p>
+</div>
+<div><h4>SHOP</h4><ul><li><a href="#men">Men</a></li><li><a href="#women">Women</a></li><li><a href="#new">New Arrivals</a></li><li><a href="#all">All Products</a></li></ul></div>
+<div><h4>CUSTOMER CARE</h4><ul id="care"><li><a href="#contact">Contact Us</a></li><li><a href="#shipping">Shipping Policy</a></li><li><a href="#returns">Return &amp; Exchange Policy</a></li><li><a href="#faqs">FAQs</a></li><li><a href="#privacy">Privacy Policy</a></li><li><a href="#terms">Terms &amp; Conditions</a></li><li><a href="#sizeguide" data-sg="">Size Guide</a></li></ul></div>
+<div><h4>SOCIAL</h4><ul><li><a href="https://www.facebook.com/share/1CDsGcFQKp/" target="_blank" rel="noopener noreferrer">Facebook</a></li><li><a href="#social" data-soc="Instagram">Instagram</a></li></ul><h4 style="margin-top:22px">CONTACT</h4><p style="font-size:13px;color:#ddd;margin:0"><a href="mailto:avel.support.bd@gmail.com">avel.support.bd@gmail.com</a><br><a href="tel:+8801575478716">+8801575478716</a><br>Savar, Dhaka</p></div>
+</div><div class="copy"><span>© 2026 AVEL. All rights reserved.</span><span></span></div></footer>
+<div class="panel" id="pn"><div id="pb" role="dialog" aria-modal="true" aria-label="Panel"></div></div>
+<div class="toast" id="ts" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script type="application/json" id="seed">{}</script>
+<script id="main">
+const $=s=>document.querySelector(s),fmt=n=>'৳'+n.toLocaleString('en-IN');
+const COL={Black:'#111',Ivory:'#E9E6DF',Stone:'#B9B2A6',Charcoal:'#44454A',Navy:'#1F2A3C'};
+const mk=(id,name,g,cat,price,sale,colors,sizes,tag,age,desc,fab)=>({id,slug:id,name,g,cat,price,sale,colors,sizes,tag,age,desc,fab});
+const P=[];
+const DEFC=['T-Shirts','Shirts','Trousers','Hoodies','Tops'],P0=JSON.parse(JSON.stringify(P));
+const SEED=(()=>{try{return JSON.parse($('#seed').textContent)||{}}catch(e){return{}}})(),S=Object.assign({tiles:{},cats:DEFC.slice(),creds:null},SEED),ALL=SEED.products||P.slice(),DEFCOL=Object.assign({},COL);Object.assign(COL,S.colors||{});(S.nocol||[]).forEach(c=>delete COL[c]);
+P.splice(0,P.length,...ALL.filter(p=>!p.hide));
+const DEFBAR=['INTRODUCING AVEL — LESS, BUT BETTER.'];const DEFSG=[['XS',34,28],['S',36,30],['M',38,32],['L',40,34],['XL',42,36]];let BT;
+function barRun(){clearInterval(BT);const L=S.bar&&S.bar.length?S.bar:DEFBAR,el=$('#bt');let i=0;el.textContent=L[0];if(L.length<2)return;const d=matchMedia('(prefers-reduced-motion:reduce)').matches?0:300;
+BT=setInterval(()=>{i=(i+1)%L.length;const a=el.animate([{transform:'translateX(0)',opacity:1},{transform:'translateX(-40px)',opacity:0}],{duration:d});a.onfinish=()=>{el.textContent=L[i];el.animate([{transform:'translateX(40px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:d})}},4000)}
+const stock=(p,s,c)=>{const v=p.vars&&p.vars[(c||p.colors[0])+'|'+s];return v?v.stock:0};
+const cur=p=>p.sale||p.price,bySlug=s=>P.find(p=>p.slug===s);
+const SH={Tee:'M95 80L125 68Q150 92 175 68L205 80L242 122L216 144L200 128V304H100V128L84 144L58 122Z',Shirt:'M95 80L125 68L150 100L175 68L205 80L242 122L216 144L200 128V312H100V128L84 144L58 122Z',Trousers:'M104 70H196L208 318H160L150 170L140 318H92Z',Hoodie:'M92 84Q150 38 208 84L250 134L224 158L206 138V300H94V138L76 158L50 134Z',Top:'M100 88L128 76Q150 98 172 76L200 88L232 126L210 146L198 132V256H102V132L90 146L68 126Z'};
+const T={'T-Shirts':'Tee',Shirts:'Shirt',Trousers:'Trousers',Hoodies:'Hoodie',Tops:'Top'};
+function art(p,c,v=0){const im=p.imgs&&p.imgs.length?p.imgs[Math.min(v,p.imgs.length-1)]:'';if(im)return '<img src="'+String(im).replace(/"/g,'%22')+'" alt="'+p.name.replace(/"/g,'')+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">';const f=COL[c]||'#111',t=T[p.cat]||'Tee',tr=v==2?'translate(-95 -60) scale(1.6)':v==1?'translate(300 0) scale(-1 1)':'';
+const ex=t=='Shirt'?'<path d="M150 100V312M125 68L150 100L175 68" fill="none" stroke="rgba(128,128,128,.5)"/>':t=='Hoodie'?'<path d="M128 100Q150 130 172 100M150 130V190" fill="none" stroke="rgba(128,128,128,.5)"/>':'';
+return `<svg viewBox="0 0 300 375" role="img" aria-label="${p.name} in ${c}, placeholder image" preserveAspectRatio="xMidYMid slice"><rect width="300" height="375" fill="${v==2?'#E9E7E1':'#EFEDE8'}"/><g transform="${tr}"><path d="${SH[t]}" fill="${f}" stroke="rgba(0,0,0,.25)"/>${ex}</g></svg>`}
+const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let cart=ld('avel-cart',[]),wish=ld('avel-wish',[]),coupon=null,pg=1,F={sz:[],col:[],cat:[],pr:'',sort:'featured',q:''},V={};
+const app=$('#app');
+function toast(m){const t=$('#ts');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2200)}
+function counts(){$('#cc').textContent=cart.reduce((a,i)=>a+i.q,0);$('#wc').textContent=wish.length;sv('avel-cart',cart);sv('avel-wish',wish)}
+const heart=p=>`<button class="wish ${wish.includes(p.id)?'on':''}" data-w="${p.id}" aria-pressed="${wish.includes(p.id)}" aria-label="Wishlist: ${p.name}"><svg viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.5 4.5 0 018-2.5A4.5 4.5 0 0120 9c0 6-8 11-8 11z"/></svg></button>`;
+const card=p=>`<article class="card"><a class="im" href="#p-${p.slug}">${art(p,p.colors[0])}${p.tag?`<span class="lbl">${p.tag}</span>`:''}</a>${heart(p)}<button class="qa" data-q="${p.id}">QUICK ADD</button>
+<h3><a href="#p-${p.slug}">${p.name}</a></h3><div class="pr">${fmt(cur(p))}${p.sale?`<s>${fmt(p.price)}</s>`:''}</div>
+<div class="sw">${p.colors.map(c=>`<span class="dot" style="background:${COL[c]}" title="${c}"></span>`).join('')}</div><div class="sz">${p.sizes.join(' · ')}</div></article>`;
+const tile=(h,l,g)=>`<a class="tile" href="#${h}" aria-label="${l}"><div style="background:${g}">${S.tiles[h]?'<img src="'+S.tiles[h].replace(/"/g,'%22')+'" alt="'+l+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">':''}<svg viewBox="0 0 300 375" style="width:100%;height:100%;${S.tiles[h]?'display:none':''}" preserveAspectRatio="xMidYMid slice"><path d="${SH[l=='WOMEN'?'Top':l=='MEN'?'Shirt':'Tee']}" fill="rgba(255,255,255,.14)" transform="translate(30 20) scale(.8)"/></svg></div><span>${l}</span></a>`;
+function home(){document.title='AVEL — Less, But Better';app.innerHTML=`
+<div class="hero"><div class="tx"><h1>AVEL</h1><div class="tag">Less, But Better.</div><p>Timeless essentials. Elevated everyday style.</p><div class="row"><a class="btn w" href="#men">SHOP MEN</a><a class="btn w o" href="#women">SHOP WOMEN</a></div></div></div>
+
+<section><div class="tiles">${tile('men','MEN','#3a3a3a')}${tile('women','WOMEN','#6b6a66')}${tile('all','ESSENTIALS','#1f1f1f')}</div></section>
+<section style="padding-top:0"><div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:28px"><h2 class="big">New Arrivals</h2><a href="#new" style="text-decoration:underline">View all</a></div><div class="grid">${P.filter(p=>p.age<=12).sort((a,b)=>a.age-b.age).slice(0,8).map(card).join('')}</div></section>
+<section class="split"><div style="background:#2b2b2b;display:grid;place-items:center;position:relative">${S.tiles.edit?`<img src="${S.tiles.edit.replace(/"/g,'%22')}" alt="AVEL lifestyle" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">`:`<svg viewBox="0 0 300 375" style="width:60%"><path d="${SH.Hoodie}" fill="#cfcdc7"/></svg>`}</div><div class="t"><h2 class="big">Less, but better.</h2><p>We believe great style doesn’t need to be complicated. AVEL brings together considered design, versatile essentials, and a timeless approach to everyday dressing.</p><a class="btn" href="#all">DISCOVER AVEL</a></div></section>
+<section class="camp"><h2 class="big">Your style. Your standard.</h2><p>Discover pieces designed to become part of your everyday.</p><a class="btn w" href="#all">EXPLORE THE COLLECTION</a></section>`}
+const META={men:['Men','Considered essentials for him: tees, shirts and trousers.'],women:['Women','Quiet, modern pieces for everyday wear.'],new:['New Arrivals','The latest additions to AVEL.'],all:['All Products','The complete AVEL collection.']};
+function list(k){document.title=META[k][0]+' — AVEL';const cats=S.cats,cols=Object.keys(COL),szs=[...new Set(P.flatMap(p=>p.sizes))];
+app.innerHTML=`<div class="pagehead"><h1 style="font-size:clamp(44px,7vw,84px)">${META[k][0]}</h1><p>${META[k][1]}</p></div>
+<div class="tools"><span id="n" aria-live="polite"></span><div style="display:flex;gap:10px"><button class="btn o" id="ftog" style="padding:10px 18px">FILTERS</button><label class="sr" for="so">Sort by</label><select id="so"><option value="featured">Featured</option><option value="newest">Newest</option><option value="lo">Price: Low to High</option><option value="hi">Price: High to Low</option></select></div></div>
+<div class="shop"><aside class="filt" id="fl"><fieldset><legend><h4>CATEGORY</h4></legend>${cats.map(c=>`<label><input type="checkbox" data-f="cat" value="${c}">${c}</label>`).join('')}</fieldset>
+<fieldset><legend><h4>SIZE</h4></legend>${szs.map(s=>`<button class="chip" data-f="sz" value="${s}" aria-pressed="false">${s}</button>`).join('')}</fieldset>
+<fieldset><legend><h4>COLOR</h4></legend>${cols.map(c=>`<button class="chip c" data-f="col" value="${c}" style="background:${COL[c]}" aria-pressed="false" aria-label="${c}"></button>`).join('')}</fieldset>
+<fieldset><legend><h4>PRICE</h4></legend>${[['','Any'],['0-2000','Under ৳2,000'],['2000-3500','৳2,000–3,500'],['3500-9999','Over ৳3,500']].map(r=>`<label><input type="radio" name="pr" data-f="pr" value="${r[0]}" ${r[0]==''?'checked':''}>${r[1]}</label>`).join('')}</fieldset>
+<button class="btn o" id="clr" style="padding:10px 18px">CLEAR ALL</button></aside>
+<div><div class="grid" id="g"></div><div style="text-align:center;margin-top:40px" id="lm"></div></div></div>`;
+V.k=k;pg=1;draw()}
+function draw(){const k=V.k;let r=P.filter(p=>k=='men'?p.g!='women':k=='women'?p.g!='men':k=='new'?p.age<=12:true);
+const q=F.q.toLowerCase();
+r=r.filter(p=>(!q||(p.name+p.cat+p.g).toLowerCase().includes(q))&&(!F.cat.length||F.cat.includes(p.cat))&&(!F.sz.length||F.sz.some(s=>p.sizes.includes(s)))&&(!F.col.length||F.col.some(c=>p.colors.includes(c))));
+if(F.pr){const[a,b]=F.pr.split('-').map(Number);r=r.filter(p=>cur(p)>=a&&cur(p)<b)}
+const so={featured:(a,b)=>P.indexOf(a)-P.indexOf(b),newest:(a,b)=>a.age-b.age,lo:(a,b)=>cur(a)-cur(b),hi:(a,b)=>cur(b)-cur(a)};r.sort(so[F.sort]);
+$('#n').textContent=r.length+(r.length==1?' product':' products');$('#so').value=F.sort;
+document.querySelectorAll('[data-f]').forEach(e=>{if(e.type=='checkbox')e.checked=F.cat.includes(e.value);else if(e.tagName=='BUTTON'){const on=F[e.dataset.f].includes(e.value);e.classList.toggle('on',on);e.setAttribute('aria-pressed',on)}});
+const sh=r.slice(0,pg*8);$('#g').innerHTML=sh.length?sh.map(card).join(''):'';
+$('#lm').innerHTML=!r.length?'<div class="empty" style="grid-column:1/-1"><h2>No matches</h2><p>Try removing a filter.</p></div>':sh.length<r.length?'<button class="btn o" id="more">LOAD MORE</button>':`<span class="sz">Showing all ${r.length}</span>`}
+function pdp(slug){const p=bySlug(slug);if(!p)return nf();document.title=p.name+' — AVEL';
+V.p=p;V.c=p.colors[0];V.s=null;V.n=1;V.i=0;
+const ldj={'@context':'https://schema.org','@type':'Product',name:p.name,description:p.desc,brand:'AVEL',offers:{'@type':'Offer',priceCurrency:'BDT',price:cur(p),availability:'https://schema.org/InStock'}};
+app.innerHTML=`<script type="application/ld+json">${JSON.stringify(ldj)}<\/script><div class="pd"><div id="gl"></div><div><a href="#${p.g=='women'?'women':'men'}" class="sz">← ${p.g=='women'?'Women':'Men'}</a><h1>${p.name}</h1>
+<div style="font-size:18px">${fmt(cur(p))}${p.sale?` <s style="color:var(--mu);font-size:14px">${fmt(p.price)}</s>`:''}</div><p style="color:var(--mu)">${p.desc}</p>
+<div class="lab"><span id="cl">COLOR: ${V.c.toUpperCase()}</span></div><div id="cs" style="display:flex;gap:10px"></div>
+<div class="lab"><span>SIZE</span><button id="sg">Size guide</button></div><div id="ss" style="display:flex;gap:8px;flex-wrap:wrap"></div><div class="err" id="er" role="alert"></div>
+<div class="lab"><span>QUANTITY</span></div><div class="qty"><button id="qm" aria-label="Decrease">−</button><span id="qn">1</span><button id="qp" aria-label="Increase">+</button></div>
+<div style="display:grid;gap:10px;margin:24px 0"><button class="btn full" id="ad">ADD TO CART</button><button class="btn o full" id="bn">BUY NOW</button></div>
+<details><summary>DESCRIPTION</summary><p style="white-space:pre-line">${esc(p.desc||'')}</p></details><details><summary>FABRIC &amp; CARE</summary><p style="white-space:pre-line">${esc(p.fab||'')}</p></details><details><summary>SHIPPING &amp; RETURNS</summary><p style="white-space:pre-line">${esc(p.ship||'Delivery across Bangladesh. Delivery charges are shown at checkout. Returns: 3 days from delivery, only for factory defects and colour mismatches, with original tags attached. See our Return & Exchange Policy.')}</p></details></div></div>
+<section style="padding-top:0;${P.some(x=>x.id!=p.id&&x.cat==p.cat)?'':'display:none'}"><h2 style="font-size:36px;margin-bottom:24px">You may also like</h2><div class="grid">${P.filter(x=>x.id!=p.id&&x.cat==p.cat).slice(0,4).map(card).join('')}</div></section>`;pv()}
+function pv(){const p=V.p;$('#gl').innerHTML=`<div class="gal"><div class="th">${(p.imgs&&p.imgs.length?p.imgs.map((_,i)=>'Photo '+(i+1)):['Front','Back','Detail']).map((n,i)=>`<button data-i="${i}" class="${V.i==i?'on':''}" aria-label="${n} view">${art(p,V.c,i)}</button>`).join('')}</div><div class="main">${art(p,V.c,V.i)}</div></div>`;
+$('#cl').textContent='COLOR: '+V.c.toUpperCase();
+$('#cs').innerHTML=p.colors.map(c=>`<button class="chip c ${c==V.c?'on':''}" data-c="${c}" style="background:${COL[c]}" aria-label="${c}" aria-pressed="${c==V.c}"></button>`).join('');
+$('#ss').innerHTML=p.sizes.map(s=>{const o=stock(p,s,V.c)==0;return `<button class="chip ${s==V.s?'on':''}" data-s="${s}" ${o?'disabled aria-label="'+s+', sold out"':''}>${s}</button>`}).join('');$('#qn').textContent=V.n}
+function addItem(p,c,s,q){if(!s){return false}const k=p.id+'|'+c+'|'+s,ex=cart.find(i=>i.k==k);if(stock(p,s,c)==0)return false;const n=(ex?ex.q:0)+q;if(n>Math.min(10,stock(p,s,c))){toast('Maximum available quantity reached');return false}
+if(ex)ex.q=n;else cart.push({k,id:p.id,c,s,q});counts();return true}
+const delivery=()=>cart.length?(V.div&&V.div!='Dhaka'?DL.out:DL.in):0;
+const sub=()=>cart.reduce((a,i)=>a+cur(bySlug(i.id))*i.q,0),disc=()=>coupon?Math.round(sub()*coupon.pct/100):0;
+function panel(h,s){$('#pb').innerHTML='<button class="pclose" aria-label="Close" id="px">×</button>'+h;$('#pn').classList.toggle('s',!!s);$('#pn').classList.add('open');$('#px').focus()}
+const close=()=>$('#pn').classList.remove('open');
+function sumHTML(){return `<div class="sum"><div><span>Subtotal</span><span>${fmt(sub())}</span></div>${coupon?`<div><span>Coupon ${coupon.code}</span><span>−${fmt(disc())}</span></div>`:''}<div><span>Delivery</span><span>${fmt(delivery())}</span></div><div class="tot"><span>Total</span><span>${fmt(sub()-disc()+delivery())}</span></div></div>`}
+function bag(){if(!cart.length)return panel('<div class="empty"><h2>Your bag is empty</h2><p>Add something you will wear every day.</p><a class="btn" href="#all" data-x>SHOP ALL</a></div>');
+panel(`<h2 style="font-size:30px;margin-bottom:6px">Your bag</h2>${cart.map(i=>{const p=bySlug(i.id);return `<div class="line"><div class="th">${art(p,i.c)}</div><div><div>${p.name}</div><div class="sz">${i.c} · ${i.s}</div><div class="qty" style="margin-top:8px"><button data-d="${i.k}" aria-label="Decrease">−</button><span>${i.q}</span><button data-u="${i.k}" aria-label="Increase">+</button></div></div><div style="text-align:right">${fmt(cur(p)*i.q)}<br><button data-r="${i.k}" style="background:none;border:0;text-decoration:underline;font-size:12px;color:var(--mu)">Remove</button></div></div>`}).join('')}
+<form id="cf" style="display:flex;margin:18px 0"><label class="sr" for="cp">Coupon code</label><input id="cp" placeholder="Coupon code" value="${coupon?coupon.code:''}"><button class="btn" style="padding:0 18px">APPLY</button></form><div class="err" id="ce"></div>${sumHTML()}<a class="btn full" href="#checkout" data-x style="margin-top:16px">CHECKOUT</a>`)}
+function checkout(){document.title='Checkout — AVEL';if(!cart.length){app.innerHTML='<div class="empty"><h2>Nothing to check out</h2><p>Your bag is empty.</p><a class="btn" href="#all">SHOP ALL</a></div>';return}
+const dv=['Barishal','Chattogram','Dhaka','Khulna','Mymensingh','Rajshahi','Rangpur','Sylhet'];
+app.innerHTML=`<div class="co"><form id="ck" novalidate><h1 style="font-size:40px;margin-bottom:18px">Checkout</h1>
+<div class="f"><label class="w">Full name<input name="name" autocomplete="name" required></label><label>Phone<input name="phone" inputmode="tel" autocomplete="tel" placeholder="01XXXXXXXXX" required></label><label>Email (optional)<input name="email" type="email" autocomplete="email"></label>
+<label>Division<select name="div" required><option value="">Select</option>${dv.map(d=>`<option>${d}</option>`).join('')}</select></label><label>District<input name="dist" required></label>
+<label class="w">Full delivery address<textarea name="addr" rows="3" autocomplete="street-address" required></textarea></label><label class="w">Delivery instructions (optional)<textarea name="note" rows="2"></textarea></label></div>
+<div class="pay" role="group" aria-label="Payment"><label><input type="radio" name="pay" checked> Cash on Delivery</label><label><input type="radio" name="pay" disabled> bKash <small>Coming soon</small></label><label><input type="radio" name="pay" disabled> Nagad <small>Coming soon</small></label><label><input type="radio" name="pay" disabled> Card <small>Coming soon</small></label></div>
+<div class="err" id="ce2" role="alert"></div><button class="btn full" id="po">PLACE ORDER</button></form>
+<aside><h2 style="font-size:26px;margin-bottom:10px">Summary</h2>${cart.map(i=>{const p=bySlug(i.id);return `<div style="display:flex;justify-content:space-between;padding:6px 0"><span>${p.name} <span class="sz">${i.c}/${i.s} ×${i.q}</span></span><span>${fmt(cur(p)*i.q)}</span></div>`}).join('')}<div style="margin-top:12px" id="cs2">${sumHTML()}</div></aside></div>`}
+function wl(){document.title='Wishlist — AVEL';const w=P.filter(p=>wish.includes(p.id));app.innerHTML=`<div class="pagehead"><h1 style="font-size:56px">Wishlist</h1></div><section style="padding-top:0">${w.length?`<div class="grid">${w.map(card).join('')}</div>`:'<div class="empty"><h2>Nothing saved yet</h2><p>Tap the heart on any product to save it here.</p><a class="btn" href="#all">BROWSE</a></div>'}</section>`}
+function nf(){app.innerHTML='<div class="empty"><h2>Page not found</h2><p>That page doesn’t exist.</p><a class="btn" href="#home">BACK HOME</a></div>'}
+function info(t){app.innerHTML=`<div class="pagehead"><h1 style="font-size:56px">${t}</h1><p>This page is a placeholder. AVEL must supply the final policy text before launch.</p></div>`;document.title=t+' — AVEL'}
+const PAGES={contact:'Contact Us',shipping:'Shipping Policy',returns:'Return & Exchange Policy',faqs:'FAQs',privacy:'Privacy Policy',terms:'Terms & Conditions'};
+$('#care').innerHTML=Object.entries(PAGES).map(([k,v])=>`<li><a href="#${k}">${v.replace('&','&amp;')}</a></li>`).join('')+'<li><a href="#sizeguide" data-sg>Size Guide</a></li>';
+function sg(){panel(`<h2 style="font-size:30px;margin-bottom:12px">Size guide</h2><div class="scroll"><table style="width:100%;border-collapse:collapse;font-size:13px"><tr style="text-align:left;border-bottom:1px solid var(--bd)"><th>Size</th><th>Chest (in)</th><th>Waist (in)</th></tr>${(S.sg&&S.sg.length?S.sg:DEFSG).map(r=>`<tr style="border-bottom:1px solid var(--bd)"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}</table></div><p class="sz" style="margin-top:12px"></p>`)}
+function route(){close();const h=location.hash.slice(1)||'home';window.scrollTo(0,0);$('#nav').classList.remove('open');
+document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')=='#'+h));
+if(h=='home')home();else if(META[h]){F={sz:[],col:[],cat:[],pr:'',sort:'featured',q:''};list(h)}
+else if(h.startsWith('p-'))pdp(h.slice(2));else if(h=='cart'){home();bag()}else if(h=='checkout')checkout();else if(h=='wishlist')wl();else if(h=='admin')adminPage();else if(PAGES[h])info(PAGES[h],h);
+else if(h=='sizeguide'||h=='social'){history.back()}else nf()}
+function srch(){panel(`<label class="sr" for="sq">Search</label><input id="sq" placeholder="Search AVEL" value="${F.q}" style="font-size:18px;padding:16px"><div id="sr" style="margin-top:16px"></div>`,1);const i=$('#sq');i.focus();const run=()=>{const q=i.value.trim().toLowerCase();F.q=q;$('#sr').innerHTML=!q?'':(r=>r.length?r.slice(0,6).map(p=>`<a href="#p-${p.slug}" data-x style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bd)"><span>${p.name}</span><span>${fmt(cur(p))}</span></a>`).join(''):'<p class="sz">No products found. Try “hoodie” or “trousers”.</p>')(P.filter(p=>(p.name+p.cat+p.g).toLowerCase().includes(q)))};i.oninput=run;run()}
+document.addEventListener('click',e=>{const t=e.target,g=s=>t.closest(s);let x;
+if(x=g('[data-w]')){const id=x.dataset.w;wish=wish.includes(id)?wish.filter(w=>w!=id):[...wish,id];counts();if(location.hash=='#wishlist')wl();else{x.classList.toggle('on');x.setAttribute('aria-pressed',x.classList.contains('on'))}toast(wish.includes(id)?'Saved to wishlist':'Removed from wishlist')}
+else if(x=g('[data-q]')){const p=bySlug(x.dataset.q);panel(`<h2 style="font-size:28px">${p.name}</h2><p>${fmt(cur(p))}</p><div class="lab sz">SIZE</div><div id="qs" style="display:flex;gap:8px;flex-wrap:wrap">${p.sizes.map(s=>`<button class="chip" data-qs="${s}" ${stock(p,s)?'':'disabled'}>${s}</button>`).join('')}</div><div class="err" id="qe"></div><button class="btn full" id="qadd">ADD TO CART</button>`,1);V.p=p;V.c=p.colors[0];V.s=null}
+else if(x=g('[data-qs]')){V.s=x.dataset.qs;document.querySelectorAll('[data-qs]').forEach(b=>b.classList.toggle('on',b==x))}
+else if(g('#qadd')){if(addItem(V.p,V.c,V.s,1)){close();toast('Added to bag')}else $('#qe').textContent='Select an available size.'}
+else if(x=g('[data-f]')){const k=x.dataset.f,v=x.value;if(k=='pr')F.pr=v;else if(x.type=='checkbox'||x.tagName=='BUTTON')F[k]=F[k].includes(v)?F[k].filter(a=>a!=v):[...F[k],v];pg=1;draw()}
+else if(g('#more')){pg++;draw()}else if(g('#clr')){F={sz:[],col:[],cat:[],pr:'',sort:'featured',q:''};document.querySelectorAll('[name=pr]')[0].checked=true;draw()}
+else if(g('#ftog'))$('#fl').classList.toggle('open');
+else if(x=g('[data-i]')){V.i=+x.dataset.i;pv()}else if(x=g('[data-c]')){V.c=x.dataset.c;pv()}
+else if(x=g('[data-s]')){V.s=x.dataset.s;$('#er').textContent='';pv()}
+else if(g('#qm')){V.n=Math.max(1,V.n-1);$('#qn').textContent=V.n}else if(g('#qp')){V.n=Math.min(10,V.n+1);$('#qn').textContent=V.n}
+else if(g('#sg')||g('[data-sg]')){e.preventDefault();sg()}
+else if(x=g('#ad,#bn')){if(!V.s){$('#er').textContent='Select a size to continue.';return}if(addItem(V.p,V.c,V.s,V.n)){counts();if(x.id=='bn')location.hash='checkout';else{toast('Added to bag');bag()}}}
+else if(x=g('[data-u]')){const i=cart.find(a=>a.k==x.dataset.u);if(i&&i.q<Math.min(10,stock(bySlug(i.id),i.s,i.c)))i.q++;counts();bag()}
+else if(x=g('[data-d]')){const i=cart.find(a=>a.k==x.dataset.d);if(i&&i.q>1)i.q--;counts();bag()}
+else if(x=g('[data-r]')){cart=cart.filter(a=>a.k!=x.dataset.r);counts();bag()}
+else if(g('[data-x]')){close()}else if(g('#px')||t.id=='pn')close();
+else if(x=g('[data-soc]')){e.preventDefault();toast('We are not on Instagram yet')}
+else if(g('#bs'))srch();else if(g('#ba'))acct();else if(g('#bw'))location.hash='wishlist';else if(g('#bb'))bag();
+else if(g('#mt')){const o=$('#nav').classList.toggle('open');$('#mt').setAttribute('aria-expanded',o)}});
+document.addEventListener('change',e=>{if(e.target.id=='so'){F.sort=e.target.value;pg=1;draw()}else if(e.target.name=='div'){V.div=e.target.value;$('#cs2').innerHTML=sumHTML()}});
+document.addEventListener('submit',e=>{e.preventDefault();const f=e.target;
+if(f.id=='cf'){const v=$('#cp').value.trim().toUpperCase();if(!v){coupon=null;bag();return}sb.rpc('check_coupon',{p_code:v}).then(r=>{if(r.error||!r.data){coupon=null;bag();$('#ce').textContent='That code isn’t valid.'}else{coupon={code:v,pct:r.data};bag()}})}
+else if(f.id=='ck'){const d=Object.fromEntries(new FormData(f));let bad=[];f.querySelectorAll('.bad').forEach(x=>x.classList.remove('bad'));
+if(!d.name.trim())bad.push('name');if(!/^01[3-9]\d{8}$/.test(d.phone.replace(/[\s-]/g,'')))bad.push('phone');if(d.email&&!/^\S+@\S+\.\S+$/.test(d.email))bad.push('email');
+if(!d.div)bad.push('div');if(!d.dist.trim())bad.push('dist');if(d.addr.trim().length<8)bad.push('addr');
+bad.forEach(n=>f.elements[n].classList.add('bad'));const m={name:'full name',phone:'a valid Bangladesh mobile number (01XXXXXXXXX)',email:'a valid email or leave it blank',div:'a division',dist:'a district',addr:'a full delivery address'};
+$('#ce2').textContent=bad.length?'Please check: '+bad.map(b=>m[b]).join('; ')+'.':'';if(bad.length)f.elements[bad[0]].focus();else placeOrder(d)}});
+document.addEventListener('keydown',e=>{if(e.key=='Escape')close()});
+let ADM=false,CAN=false,ED=-1,AF={g:'',q:''},rs=0;
+const esc=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const sha=async x=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(x)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+const applyVis=()=>P.splice(0,P.length,...ALL.filter(p=>ADM||(!p.hide&&p.colors.length)));
+const showLink=()=>{if(!$('#alink'))$('.ic').insertAdjacentHTML('afterbegin','<a id="alink" href="#admin" style="font-size:11px;letter-spacing:.14em;align-self:center;padding:0 8px">DASHBOARD</a>')};
+const msg=t=>{const m=$('#am');if(m)m.textContent=t};
+function adminPage(){document.title='Dashboard — AVEL';if(!ADM){app.innerHTML='<div class="empty"><h2>Restricted</h2><p>You do not have access to this page.</p><a class="btn" href="#home">BACK HOME</a></div>';return}
+const e=ED>=0?ALL[ED]:{},ci=(k,l)=>`<label>${l}<input data-tile="${k}" value="${esc(S.tiles[k]||'')}" placeholder="https://… or upload"></label><label>Upload<input type="file" accept="image/*" data-ut="${k}"></label>`;
+app.innerHTML=`<div class="pagehead"><div id="vcw" style="float:right;text-align:right;border:1px solid var(--bd);padding:12px 16px;min-width:170px"><div class="sz">Visitors</div><div style="font-size:13px">Today: <b id="vt">0</b></div><button class="btn o" id="vr" style="padding:6px 10px;margin-top:8px;font-size:10px">RESET</button></div><h1 style="font-size:48px">Dashboard</h1><p>Changes stay here until you press Save to site. Saving updates the live store for every visitor.</p><div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap"><button class="btn" id="apub">SAVE TO SITE</button></div><div class="err" id="am" role="status"></div></div>
+<section style="padding-top:0;display:grid;gap:48px"><div><h2 style="font-size:30px;margin-bottom:12px">Homepage images</h2><div class="f" style="max-width:760px">${ci('men','Men image link')}${ci('women','Women image link')}${ci('all','Essentials image link')}${ci('edit','Brand section image link')}</div></div>
+<div><h2 style="font-size:30px;margin-bottom:12px">Policy pages</h2><label class="sr" for="apk">Page</label><select id="apk" style="max-width:360px;margin-bottom:10px">${Object.keys(PAGES).map(k=>`<option value="${k}">${esc(PAGES[k])}</option>`).join('')}</select><label class="sr" for="apt">Page text</label><textarea id="apt" rows="12" style="max-width:720px">${esc((S.pg&&S.pg.contact)||PG.contact)}</textarea><p class="sz">Start a line with # for a heading. Leave a blank line between paragraphs.</p></div>
+<div><h2 style="font-size:30px;margin-bottom:12px">Size guide</h2><label class="sr" for="asg">Size guide rows</label><textarea id="asg" rows="6" style="max-width:560px">${esc((S.sg&&S.sg.length?S.sg:DEFSG).map(r=>r.join(', ')).join('\n'))}</textarea><p class="sz">One row per line: Size, Chest (in), Waist (in). Example: M, 38, 32</p></div>
+<div><h2 style="font-size:30px;margin-bottom:12px">Announcement bar</h2><label class="sr" for="abar">Announcement messages</label><textarea id="abar" rows="3" style="max-width:560px">${esc((S.bar&&S.bar.length?S.bar:DEFBAR).join('\n'))}</textarea><p class="sz">One message per line. With more than one, they slide every 4 seconds.</p></div>
+<div><h2 style="font-size:30px;margin-bottom:12px">Colors</h2><div id="acols" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"></div><div style="display:flex;gap:8px;max-width:420px"><input id="acoln" placeholder="Color name" aria-label="Color name"><input id="acolh" type="color" value="#888888" aria-label="Color" style="width:56px;padding:2px"><button class="btn" id="acoladd" style="padding:0 18px">ADD</button></div></div>
+<div><h2 style="font-size:30px;margin-bottom:12px">Categories</h2><div id="acats" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"></div><div style="display:flex;max-width:360px"><input id="acn" placeholder="New category" aria-label="New category"><button class="btn" id="acadd" style="padding:0 18px">ADD</button></div></div>
+<div><h2 style="font-size:30px;margin-bottom:12px">${ED>=0?'Edit product':'Add product'}</h2><form id="anf" class="f" style="max-width:720px"><label class="w">Name<input name="name" required value="${esc(e.name||'')}"></label>
+<label>Gender<select name="g">${['men','women','unisex'].map(g=>`<option ${e.g==g?'selected':''}>${g}</option>`).join('')}</select></label><label>Category<select name="cat">${S.cats.map(c=>`<option ${e.cat==c?'selected':''}>${esc(c)}</option>`).join('')}</select></label>
+<label>Old price ৳<input name="price" type="number" min="1" required value="${e.price||''}"></label><label>Discount price ৳ (optional)<input name="sale" type="number" min="0" value="${e.sale||''}"></label>
+<div class="w"><div class="sz" style="margin-bottom:6px">Colors</div><div style="display:flex;gap:14px;flex-wrap:wrap">${Object.keys(COL).map(c=>`<label style="display:flex;gap:6px;align-items:center;flex-direction:row"><input type="checkbox" name="col" value="${c}" style="width:auto" ${(e.colors||['Black']).includes(c)?'checked':''}><span class="dot" style="background:${COL[c]}"></span>${c}</label>`).join('')}</div></div>
+<label class="w">Sizes (comma separated)<input name="sizes" value="${esc((e.sizes||['S','M','L','XL']).join(','))}"></label>
+<label>Stock per variant (leave blank to keep)<input name="stock" type="number" min="0" value="${ED>=0?'':'10'}"></label>
+<label class="w">Tag on product image (optional, e.g. NEW, BESTSELLER)<input name="tag" list="atags" maxlength="20" value="${esc(ED>=0?(e.tag||''):'NEW')}"><datalist id="atags"><option value="NEW"><option value="BESTSELLER"><option value="SALE"></datalist></label>
+<label class="w">Description<textarea name="desc" rows="3">${esc(e.desc||'')}</textarea></label><label class="w">Fabric &amp; care<textarea name="fab" rows="3">${esc(e.fab||'')}</textarea></label><label class="w">Shipping &amp; returns<textarea name="ship" rows="3" placeholder="Leave empty to use the default text">${esc(e.ship||'')}</textarea></label>
+<label class="w">Image links (one per line, first is the main image)<textarea name="imgs" id="aimgs" rows="4">${esc((e.imgs||[]).join('\n'))}</textarea></label><label class="w">Upload images<input type="file" id="upp" accept="image/*" multiple></label>
+<div class="w" style="display:flex;gap:10px"><button class="btn">${ED>=0?'UPDATE PRODUCT':'ADD PRODUCT'}</button>${ED>=0?'<button type="button" class="btn o" id="acan">CANCEL</button>':''}</div></form></div>
+<div><h2 style="font-size:30px;margin-bottom:12px">Products</h2><div style="display:flex;gap:10px;flex-wrap:wrap;max-width:560px;margin-bottom:12px"><label class="sr" for="aq">Search by name</label><input id="aq" placeholder="Search by name" value="${esc(AF.q)}" style="flex:1"><label class="sr" for="agf">Filter</label><select id="agf" style="width:auto"><option value="">All</option>${['men','women','unisex'].map(g=>`<option ${AF.g==g?'selected':''}>${g}</option>`).join('')}</select></div><div id="alist"></div></div>
+<div><h2 style="font-size:30px;margin-bottom:8px">Orders</h2><div id="aord"></div></div></section>`;acats();acols();alist();vc();loadOrders()}
+document.addEventListener('change',ev=>{if(!ADM||ev.target.id!='abar')return;S.bar=ev.target.value.split('\n').map(x=>x.trim()).filter(Boolean);barRun();msg('Bar updated. Press Save to site to put it live.')});
+const today=()=>new Date().toISOString().slice(0,10);let VS=ld('avel-vis',null);if(!VS||!Array.isArray(VS.seen))VS={d:today(),seen:[]};let LIVE=0,RM=null;
+async function vc(){if(!$('#vt'))return;const r=await sb.from('daily_visits').select('visitors').eq('day',new Date().toLocaleDateString('sv',{timeZone:'Asia/Dhaka'})).maybeSingle();$('#vt').textContent=r.data?r.data.visitors:0}
+document.addEventListener('click',ev=>{if(ADM&&ev.target.closest('#vr'))sb.rpc('reset_today_visits').then(vc)});
+document.addEventListener('change',ev=>{if(!ADM||ev.target.id!='asg')return;S.sg=ev.target.value.split('\n').map(l=>l.split(',').map(x=>x.trim().replace(/[<>"&]/g,''))).filter(r=>r[0]).map(r=>[r[0],r[1]||'',r[2]||'']);msg('Size guide updated. Press Save to site to put it live.')});
+const PG={
+contact:`# We’re here to help
+
+For questions about an order, a product or a return, contact the AVEL customer care team. Please include your order details so we can help you faster.
+
+# Email
+
+avel.support.bd@gmail.com
+
+# Phone
+
++8801575478716
+
+# Business hours
+
+All days, 9:00 AM to 12:00 AM
+
+# Address
+
+Savar, Dhaka
+
+# Before you contact us about a return
+
+Please read our Return & Exchange Policy first. Claims must be raised within 3 days of delivery.`,
+shipping:`# Delivery across Bangladesh
+
+AVEL delivers to addresses across Bangladesh through our courier partners. Enter your full delivery address and a working phone number at checkout so the courier can reach you.
+
+# Processing and delivery time
+
+Orders are processed after they are confirmed.
+
+# Delivery charges
+
+Delivery charges are shown at checkout, based on your delivery area, before you place the order.
+
+# Order confirmation
+
+We may call or message you on the phone number you provide to confirm your order and address. Please keep your phone available.
+
+# Inspect your parcel at delivery
+
+Please check your parcel in front of the delivery person before they leave. Confirm that the products, sizes and colours match your order and that nothing is damaged. If something is wrong, tell the delivery person and contact us right away. See our Return & Exchange Policy for details.
+
+# Failed delivery
+
+If we cannot reach you or no one is available to receive the order, the courier may attempt delivery again or return the parcel to us.`,
+returns:`# Return & exchange window
+
+You can request a return or exchange within 3 days of receiving your order.
+
+# What we accept
+
+We accept returns and exchanges only in these two cases:
+- Factory defect
+- Colour mismatch (the colour you received is different from the colour you ordered)
+
+# Conditions
+
+- The product must be unused and unwashed.
+- The product must have all original tags attached and be in its original packaging.
+- The claim must be raised within 3 days of delivery.
+
+# Check before the delivery person leaves
+
+Please open and check your parcel in front of the delivery person before they leave. Check the product, size, colour and condition. If you find a factory defect or a colour mismatch, tell the delivery person immediately and contact us. Claims for issues that could have been seen at delivery may not be accepted after the delivery person has left.
+
+# What we do not accept
+
+We do not accept returns or exchanges for change of mind, fit or size preference, or for items that have been worn, washed, altered or damaged after delivery, or that are missing their tags. Please check the Size Guide before you order.
+
+# How to make a claim
+
+Contact us within 3 days of delivery with your order number and clear photos of the issue and the attached tags. Our team will review your request and tell you the next step.
+
+# Resolution
+
+Approved claims are resolved by exchanging the product for the same item in the correct colour, subject to availability. If a replacement is not available, our team will contact you with other options.`,
+faqs:`# How do I place an order?
+
+Choose your product, colour and size, add it to your bag and complete the checkout form with your delivery details.
+
+# Which payment methods do you accept?
+
+Available payment methods are shown at checkout.
+
+# How long does delivery take?
+
+Delivery time depends on your location. See our Shipping Policy for details.
+
+# Can I return or exchange a product?
+
+Yes, within 3 days of delivery, only for a factory defect or a colour mismatch. The product must be unused, unwashed and have its original tags. See our Return & Exchange Policy.
+
+# Can I return an item because it does not fit?
+
+No. Returns and exchanges are only for factory defects and colour mismatches, so please check the Size Guide before ordering.
+
+# What should I do when my order arrives?
+
+Check the parcel in front of the delivery person before they leave. If anything is wrong, tell them and contact us right away.
+
+# How do I find my size?
+
+Open the Size Guide on any product page and compare the measurements with a garment that fits you well.
+
+# How can I contact AVEL?
+
+Visit our Contact Us page for our email, phone number and business hours.`,
+privacy:`Last updated: October 24, 2026
+
+# Information we collect
+
+When you order or contact us, we collect the details you give us: your name, phone number, email address (optional), delivery address and delivery instructions, and the items you order.
+
+# How we use your information
+
+We use your information to confirm and deliver your order, to contact you about it, to handle returns and exchanges, to answer your questions, and to improve our store.
+
+# Sharing your information
+
+We share the details needed to complete your order with courier partners and, when you pay online, with payment providers. We do not sell your personal information.
+
+# Cart and device storage
+
+Your bag and wishlist are saved in your browser on your device so they are still there when you return. You can clear them at any time in your browser settings.
+
+# Newsletter
+
+If you join our newsletter, we will use your email address to send AVEL updates. You can ask to stop at any time.
+
+# Your choices
+
+You can ask us to correct or delete your personal information by contacting us through the Contact Us page.
+
+# Changes to this policy
+
+We may update this policy from time to time. The latest version will always be on this page.`,
+terms:`Last updated: October 24, 2026
+
+# Using this website
+
+By using this website and placing an order, you agree to these terms. Please read them carefully.
+
+# Products and pricing
+
+All prices are in Bangladeshi taka (৳). We try to show colours accurately, but screens differ, so small variations in appearance are possible. Prices and availability may change without notice.
+
+# Orders
+
+An order is accepted when AVEL confirms it. We may cancel or refuse an order, for example if an item is out of stock, a price is shown incorrectly, or we cannot verify your details. Please give accurate delivery information.
+
+# Delivery
+
+Delivery is subject to our Shipping Policy. Please inspect your parcel in front of the delivery person before they leave.
+
+# Returns and exchanges
+
+Returns and exchanges are governed by our Return & Exchange Policy: 3 days from delivery, only for factory defects and colour mismatches, with original tags attached.
+
+# Intellectual property
+
+The AVEL name, logo, images and content on this website belong to AVEL. You may not copy or use them without our written permission.
+
+# Limitation of liability
+
+To the extent permitted by law, AVEL is not liable for indirect or consequential loss arising from the use of this website or our products.
+
+# Governing law
+
+These terms are governed by the laws of Bangladesh.
+
+# Contact
+
+For questions about these terms, please use the Contact Us page.`};
+function info(t,k){document.title=t+' — AVEL';const x=(S.pg&&S.pg[k])||PG[k]||'';app.innerHTML=`<div class="pagehead"><h1 style="font-size:clamp(40px,6vw,64px)">${esc(t)}</h1></div><section style="padding-top:0"><div style="max-width:720px;font-size:15px;line-height:1.75">${x.split(/\n\n+/).map(b=>b.startsWith('# ')?`<h3 style="font-size:26px;margin:32px 0 8px">${esc(b.slice(2))}</h3>`:`<p style="margin:0 0 14px;color:var(--mu);white-space:pre-line">${esc(b)}</p>`).join('')}</div></section>`}
+document.addEventListener('change',ev=>{if(!ADM)return;const t=ev.target;if(t.id=='apk')$('#apt').value=(S.pg&&S.pg[t.value])||PG[t.value];else if(t.id=='apt'){S.pg=S.pg||{};S.pg[$('#apk').value]=t.value;msg('Page updated. Press Save to site to put it live.')}});
+function acols(){$('#acols').innerHTML=Object.keys(COL).map(c=>`<span class="chip" style="display:inline-flex;gap:8px;align-items:center"><span class="dot" style="background:${COL[c]}"></span>${esc(c)}<button data-rcl="${esc(c)}" aria-label="Remove ${esc(c)}" style="background:none;border:0;padding:0">×</button></span>`).join('')}
+document.addEventListener('click',ev=>{if(!ADM)return;const t=ev.target;let x;
+if(t.closest('#acoladd')){const n=$('#acoln').value.trim(),h=$('#acolh').value;if(!n||COL[n]){toast('Enter a new color name');return}COL[n]=h;S.colors=S.colors||{};S.colors[n]=h;S.nocol=(S.nocol||[]).filter(a=>a!=n);adminPage();msg('Color added. Press Save to site to put it live.')}
+else if(x=t.closest('[data-rcl]')){const c=x.dataset.rcl;if(ALL.some(p=>p.colors.includes(c)))toast('Remove it from products first');else if(Object.keys(COL).length<2)toast('Keep at least one color');else{delete COL[c];if(S.colors)delete S.colors[c];S.nocol=S.nocol||[];S.nocol.push(c);adminPage();msg('Color removed. Press Save to site to put it live.')}}});
+function acats(){$('#acats').innerHTML=S.cats.map(c=>`<span class="chip" style="display:inline-flex;gap:8px;align-items:center">${esc(c)}<button data-rc="${esc(c)}" aria-label="Remove ${esc(c)}" style="background:none;border:0;padding:0">×</button></span>`).join('')}
+function alist(){const q=AF.q.toLowerCase(),r=ALL.map((p,i)=>[p,i]).filter(([p])=>(!AF.g||p.g==AF.g)&&(!q||p.name.toLowerCase().includes(q)));
+$('#alist').innerHTML=`<p class="sz">${r.length} of ${ALL.length} products</p>`+(r.length?`<div class="scroll"><table style="width:100%;border-collapse:collapse;font-size:13px"><tr style="text-align:left;border-bottom:1px solid var(--bd)"><th>Name</th><th>Gender</th><th>Category</th><th>Old</th><th>Now</th><th></th></tr>${r.map(([p,i])=>`<tr style="border-bottom:1px solid var(--bd)"><td>${esc(p.name)}${p.hide?' <span class="sz">(hidden)</span>':''}</td><td>${p.g}</td><td>${esc(p.cat)}</td><td>${fmt(p.price)}</td><td>${p.sale?fmt(p.sale):'—'}</td><td style="white-space:nowrap"><button class="btn o" data-ed="${i}" style="padding:6px 10px">EDIT</button> <button class="btn o" data-hd="${i}" style="padding:6px 10px">${p.hide?'SHOW':'HIDE'}</button> <button class="btn o" data-dl="${i}" style="padding:6px 10px">REMOVE</button></td></tr>`).join('')}</table></div>`:'<p class="sz">No products match.</p>')}
+const up=async f=>{const path=Date.now()+'-'+Math.random().toString(36).slice(2,8)+'-'+f.name.replace(/[^a-z0-9.]+/gi,'-');const r=await sb.storage.from('product-images').upload(path,f);if(r.error)throw r.error;return sb.storage.from('product-images').getPublicUrl(path).data.publicUrl};
+document.addEventListener('submit',async ev=>{const f=ev.target;
+if(f.id=='lf'){const h=await sha(f.e.value.trim().toLowerCase()+'|'+f.p.value);if(!CAN){$('#lm').textContent='Email or password is incorrect.';return}
+if(!S.creds)S.creds=h;else if(S.creds!==h){$('#lm').textContent='Email or password is incorrect.';return}
+ADM=true;try{sessionStorage.setItem('avel-adm','1')}catch(x){}applyVis();showLink();close();location.hash='admin';route()}
+else if(f.id=='anf'&&ADM){const d=new FormData(f),pr=Number(d.get('price')),sl=Number(d.get('sale'))||0,col=d.getAll('col'),sz=d.get('sizes').split(',').map(x=>x.trim()).filter(Boolean),im=d.get('imgs').split('\n').map(x=>x.trim()).filter(Boolean),nm=d.get('name').trim();
+if(!nm||!(pr>0)||sl>=pr&&sl>0||!col.length||!sz.length){toast('Check name, prices (discount must be lower), colors and sizes');return}
+const o={name:nm,g:d.get('g'),cat:d.get('cat'),price:pr,sale:sl,colors:col,sizes:sz,imgs:im,stock0:d.get('stock')===''?null:Number(d.get('stock')),tag:(d.get('tag')||'').trim().toUpperCase().replace(/[<>"&]/g,''),desc:d.get('desc').trim(),fab:d.get('fab').trim(),ship:d.get('ship').trim()};
+if(ED>=0)Object.assign(ALL[ED],o);else{const id=nm.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'item';let k=id,n=1;while(ALL.some(p=>p.slug==k))k=id+'-'+(++n);ALL.push(Object.assign(mk(k,nm,o.g,o.cat,pr,sl,col,sz,'NEW',0,'Description coming soon.','Details coming soon.'),{imgs:im,tag:o.tag,desc:o.desc||'Description coming soon.',fab:o.fab||'Details coming soon.',ship:o.ship}))}
+ED=-1;applyVis();adminPage();msg('Saved here. Press Save to site to put it live.')}});
+document.addEventListener('click',ev=>{if(!ADM)return;const t=ev.target,g=s=>t.closest(s);let x;
+if(g('#apub'))pub();else if(g('#aout')){ADM=false;try{sessionStorage.removeItem('avel-adm')}catch(z){}applyVis();$('#alink')&&$('#alink').remove();location.hash='home'}
+else if(g('#ars')){if(rs){ALL.splice(0,ALL.length,...JSON.parse(JSON.stringify(P0)));S.tiles={};S.cats=DEFC.slice();S.colors={};S.nocol=[];S.bar=[];S.sg=[];S.pg={};barRun();Object.keys(COL).forEach(k=>delete COL[k]);Object.assign(COL,DEFCOL);rs=0;applyVis();adminPage();msg('Reset here. Press Save to site to put it live.')}else{rs=1;g('#ars').textContent='CLICK AGAIN TO CONFIRM'}}
+else if(g('#acadd')){const v=$('#acn').value.trim();if(v&&!S.cats.includes(v)){S.cats.push(v);adminPage();msg('Category added. Press Save to site to put it live.')}}
+else if(x=g('[data-rc]')){const c=x.dataset.rc;if(ALL.some(p=>p.cat==c))toast('Move or remove its products first');else{S.cats=S.cats.filter(a=>a!=c);adminPage()}}
+else if(x=g('[data-ed]')){ED=+x.dataset.ed;adminPage();window.scrollTo(0,$('#anf').offsetTop)}else if(g('#acan')){ED=-1;adminPage()}
+else if(x=g('[data-hd]')){const p=ALL[+x.dataset.hd];p.hide=!p.hide;applyVis();alist()}else if(x=g('[data-dl]')){ALL.splice(+x.dataset.dl,1);applyVis();alist()}});
+document.addEventListener('input',ev=>{if(ADM&&ev.target.id=='aq'){AF.q=ev.target.value;alist()}});
+document.addEventListener('change',async ev=>{if(!ADM)return;const t=ev.target;
+if(t.id=='agf'){AF.g=t.value;alist()}else if(t.dataset.tile){S.tiles[t.dataset.tile]=t.value.trim();msg('Tile updated. Press Save to site to put it live.')}
+else if(t.dataset.ut||t.id=='upp'){try{msg('Uploading…');const u=[];for(const fl of t.files)u.push(await up(fl));
+if(t.id=='upp'){const a=$('#aimgs');a.value=(a.value.trim()?a.value.trim()+'\n':'')+u.join('\n')}else{S.tiles[t.dataset.ut]=u[0];document.querySelector('[data-tile="'+t.dataset.ut+'"]').value=u[0]}msg('Uploaded.')}catch(z){msg('Upload is not available for this account.')}}});
+
+const SB_URL='https://zxngjeibikfjixhkxniw.supabase.co',SB_KEY='sb_publishable_Vtb_DvUsl96HXNILHAGWww_AcOtobRi';
+let sb=null,SES=null,DL={in:70,out:120};
+const slugify=x=>x.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+async function loadAll(){const [c,co,p,st]=await Promise.all([sb.from('categories').select('name').order('sort_order'),sb.from('colors').select('name,hex'),sb.from('products').select('*,categories(name),product_images(url,position),product_variants(id,color,size,stock)').order('created_at',{ascending:false}),sb.from('site_settings').select('key,value')]);
+if(c.error||co.error||p.error)throw new Error('load');
+S.cats=c.data.map(x=>x.name);Object.keys(COL).forEach(k=>delete COL[k]);co.data.forEach(x=>COL[x.name]=x.hex);
+(st.data||[]).forEach(r=>{const v=r.value;if(r.key=='announcement')S.bar=v;else if(r.key=='tiles')S.tiles=v;else if(r.key=='size_guide')S.sg=v;else if(r.key=='pages')S.pg=v;else if(r.key=='delivery')DL={in:v.inside_dhaka,out:v.outside_dhaka}});
+const SZ=['XS','S','M','L','XL','XXL'];
+ALL.splice(0,ALL.length,...p.data.map((r,i)=>{const vs=r.product_variants||[],vars={};vs.forEach(v=>vars[v.color+'|'+v.size]={id:v.id,stock:v.stock});
+return{id:r.slug,slug:r.slug,uuid:r.id,name:r.name,g:r.gender,cat:r.categories.name,price:+r.price,sale:r.sale_price?+r.sale_price:0,tag:r.tag||'',age:i,desc:r.description||'',fab:r.fabric_care||'',ship:r.shipping_returns||'',hide:!r.is_active,imgs:(r.product_images||[]).sort((a,b)=>a.position-b.position).map(x=>x.url),colors:[...new Set(vs.map(v=>v.color))],sizes:[...new Set(vs.map(v=>v.size))].sort((a,b)=>(SZ.indexOf(a)+1||99)-(SZ.indexOf(b)+1||99)||a.localeCompare(b,undefined,{numeric:true})),vars}}));applyVis()}
+async function boot(){if(SB_KEY.startsWith('PASTE')){app.innerHTML='<div class="empty"><h2>Almost ready</h2><p>Add your Supabase anon key at the top of the script to connect the store.</p></div>';return}
+sb=window.supabase.createClient(SB_URL,SB_KEY);
+try{await loadAll()}catch(e){app.innerHTML='<div class="empty"><h2>We could not load the store</h2><p>Please refresh the page.</p></div>';return}
+try{const {data}=await sb.auth.getSession();SES=data.session;if(SES){const r=await sb.from('profiles').select('role').eq('id',SES.user.id).maybeSingle();CAN=!!r.data&&r.data.role=='admin';if(CAN){ADM=true;applyVis();showLink()}}}catch(e){}
+try{if(!sessionStorage.getItem('avel-v')){sb.rpc('track_visit').then(()=>{});sessionStorage.setItem('avel-v','1')}}catch(e){}
+barRun();route()}
+async function placeOrder(d){const b=$('#po');b.disabled=true;b.textContent='PLACING ORDER…';
+try{const items=cart.map(i=>({variant_id:bySlug(i.id).vars[i.c+'|'+i.s].id,qty:i.q}));
+const {data,error}=await sb.rpc('place_order',{p_customer:{name:d.name,phone:d.phone.replace(/[\s-]/g,''),email:d.email,division:d.div,district:d.dist,address:d.addr,notes:d.note},p_items:items,p_coupon:coupon?coupon.code:null,p_payment:'cod'});
+if(error)throw error;cart=[];coupon=null;counts();app.innerHTML=`<div class="empty"><h2>Thank you</h2><p>Your order <b>${esc(data.order_number)}</b> has been placed. Total ${fmt(Number(data.total))}, payable in cash on delivery.<br>Please check your parcel in front of the delivery person before they leave.</p><a class="btn" href="#home">CONTINUE SHOPPING</a></div>`;window.scrollTo(0,0)}
+catch(e){b.disabled=false;b.textContent='PLACE ORDER';$('#ce2').textContent=(e.message||'We could not place your order')+'. Please try again.'}}
+async function acct(){if(!sb)return;if(!SES){panel(`<h2 style="font-size:30px;margin-bottom:10px">Sign in</h2><p class="sz" style="margin-bottom:14px">Sign in to see your order history. You can order without an account.</p><button class="btn full" id="gl">CONTINUE WITH GOOGLE</button>`,1);return}
+panel(`<h2 style="font-size:30px;margin-bottom:6px">Account</h2><p class="sz">${esc(SES.user.email)}</p><div id="aoh" style="margin:16px 0"></div>${ADM?'<a class="btn full" href="#admin" data-x style="margin-bottom:10px">DASHBOARD</a>':''}<button class="btn o full" id="gout">SIGN OUT</button>`,1);
+const r=await sb.from('orders').select('order_number,created_at,status,total').eq('user_id',SES.user.id).order('created_at',{ascending:false}).limit(20);
+$('#aoh').innerHTML=r.data&&r.data.length?r.data.map(o=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd)"><span>${esc(o.order_number)}<br><span class="sz">${new Date(o.created_at).toLocaleDateString()} · ${esc(o.status)}</span></span><span>${fmt(Number(o.total))}</span></div>`).join(''):'<p class="sz">No orders yet.</p>'}
+document.addEventListener('click',async ev=>{const t=ev.target;if(t.closest('#gl'))sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});else if(t.closest('#gout')){await sb.auth.signOut();location.reload()}});
+async function loadOrders(){const el=$('#aord');if(!el)return;const r=await sb.from('orders').select('id,order_number,created_at,customer_name,phone,division,district,address,notes,status,total,order_items(product_name,color,size,qty)').order('created_at',{ascending:false}).limit(50);
+el.innerHTML=r.error?'<p class="sz">Could not load orders.</p>':!r.data.length?'<p class="sz">No orders yet.</p>':`<div class="scroll"><table style="width:100%;border-collapse:collapse;font-size:13px"><tr style="text-align:left;border-bottom:1px solid var(--bd)"><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th></tr>${r.data.map(o=>`<tr style="border-bottom:1px solid var(--bd);vertical-align:top"><td>${esc(o.order_number)}<br><span class="sz">${new Date(o.created_at).toLocaleString()}</span></td><td>${esc(o.customer_name)}<br>${esc(o.phone)}<br><span class="sz">${esc(o.address)}, ${esc(o.district)}, ${esc(o.division)}${o.notes?'<br>Note: '+esc(o.notes):''}</span></td><td>${o.order_items.map(i=>esc(i.product_name)+' ('+esc(i.color)+'/'+esc(i.size)+') ×'+i.qty).join('<br>')}</td><td>${fmt(Number(o.total))}</td><td><select data-os="${o.id}" style="width:auto">${['pending','confirmed','processing','shipped','delivered','cancelled'].map(x=>`<option ${o.status==x?'selected':''}>${x}</option>`).join('')}</select></td></tr>`).join('')}</table></div>`}
+document.addEventListener('change',async ev=>{const t=ev.target;if(ADM&&t.dataset.os){const r=await sb.from('orders').update({status:t.value}).eq('id',t.dataset.os);toast(r.error?'Could not update status':'Status updated')}});
+async function pub(){if(!ADM)return;msg('Saving…');
+try{const ok=async q=>{const r=await q;if(r.error)throw r.error;return r.data},q=a=>'('+a.map(x=>'"'+x.replace(/"/g,'')+'"').join(',')+')';
+await ok(sb.from('categories').upsert(S.cats.map((n,i)=>({name:n,slug:slugify(n),sort_order:i})),{onConflict:'name'}));
+await ok(sb.from('colors').upsert(Object.entries(COL).map(([name,hex])=>({name,hex})),{onConflict:'name'}));
+const cm={};(await ok(sb.from('categories').select('id,name'))).forEach(c=>cm[c.name]=c.id);
+await ok(sb.from('site_settings').upsert([['announcement',S.bar&&S.bar.length?S.bar:DEFBAR],['tiles',S.tiles||{}],['size_guide',S.sg&&S.sg.length?S.sg:DEFSG],['pages',S.pg||{}],['delivery',{inside_dhaka:DL.in,outside_dhaka:DL.out}]].map(([key,value])=>({key,value,updated_at:new Date().toISOString()})),{onConflict:'key'}));
+const keep=ALL.map(p=>p.slug);for(const r of await ok(sb.from('products').select('slug')))if(!keep.includes(r.slug))await ok(sb.from('products').delete().eq('slug',r.slug));
+for(const p of ALL){const row=await ok(sb.from('products').upsert({slug:p.slug,name:p.name,gender:p.g,category_id:cm[p.cat],price:p.price,sale_price:p.sale||null,tag:p.tag||null,description:p.desc,fabric_care:p.fab,shipping_returns:p.ship||null,is_active:!p.hide},{onConflict:'slug'}).select('id'));const id=row[0].id;
+await ok(sb.from('product_images').delete().eq('product_id',id));if(p.imgs&&p.imgs.length)await ok(sb.from('product_images').insert(p.imgs.map((url,position)=>({product_id:id,url,position}))));
+const combos=[];p.colors.forEach(c=>p.sizes.forEach(z=>combos.push({product_id:id,color:c,size:z,stock:0})));
+const have=await ok(sb.from('product_variants').select('id,color,size').eq('product_id',id)),want=new Set(combos.map(x=>x.color+'|'+x.size)),hs=new Set(have.map(v=>v.color+'|'+v.size));
+for(const v of have)if(!want.has(v.color+'|'+v.size))await ok(sb.from('product_variants').delete().eq('id',v.id));
+const fresh=combos.filter(x=>!hs.has(x.color+'|'+x.size)).map(x=>({...x,stock:p.stock0!=null?p.stock0:0}));if(fresh.length)await ok(sb.from('product_variants').insert(fresh));
+if(p.stock0!=null)await ok(sb.from('product_variants').update({stock:p.stock0}).eq('product_id',id));delete p.stock0}
+await ok(sb.from('categories').delete().not('name','in',q(S.cats)));await ok(sb.from('colors').delete().not('name','in',q(Object.keys(COL))));
+await loadAll();adminPage();msg('Saved. The live store is updated.')}catch(e){msg('Could not save: '+(e.message||'check admin access')+'.')}}
+window.addEventListener('hashchange',route);counts();app.innerHTML='<div class="empty"><p>Loading…</p></div>';boot();
+</script>
+</body></html>
