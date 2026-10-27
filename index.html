@@ -470,7 +470,7 @@ else if(f.id=='anf'&&ADM){const d=new FormData(f),pr=Number(d.get('price')),sl=N
 if(!nm||!(pr>0)||sl>=pr&&sl>0||!col.length||!sz.length){toast('Check name, prices (discount must be lower), colors and sizes');return}
 const o={name:nm,g:d.get('g'),cat:d.get('cat'),price:pr,sale:sl,colors:col,sizes:sz,imgs:im,stockBy:szs,ess:d.get('ess')==='on',sku:(d.get('sku')||'').trim().replace(/[<>"&]/g,''),chart:(r=>r.length>1?r:null)(d.get('chart').split('\n').map(l=>l.split(',').map(x=>x.trim().replace(/[<>"&]/g,''))).filter(r=>r.some(Boolean))),tag:(d.get('tag')||'').trim().toUpperCase().replace(/[<>"&]/g,''),desc:d.get('desc').trim(),fab:d.get('fab').trim(),ship:d.get('ship').trim()};
 if(ED>=0)Object.assign(ALL[ED],o);else{const id=nm.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'item';let k=id,n=1;while(ALL.some(p=>p.slug==k))k=id+'-'+(++n);ALL.push(Object.assign(mk(k,nm,o.g,o.cat,pr,sl,col,sz,'NEW',0,'Description coming soon.','Details coming soon.'),{imgs:im,stockBy:o.stockBy,ess:o.ess,sku:o.sku,chart:o.chart,tag:o.tag,desc:o.desc||'Description coming soon.',fab:o.fab||'Details coming soon.',ship:o.ship}))}
-localVars(ED>=0?ALL[ED]:ALL[ALL.length-1]);ED=-1;applyVis();adminPage();msg('Saved here. Press Save to site to put it live.')}});
+localVars(ED>=0?ALL[ED]:ALL[ALL.length-1]);ED=-1;applyVis();adminPage();pub()}});
 document.addEventListener('click',ev=>{if(!ADM)return;const t=ev.target,g=s=>t.closest(s);let x;
 if(g('#apub'))pub();else if(g('#aout')){ADM=false;try{sessionStorage.removeItem('avel-adm')}catch(z){}applyVis();$('#alink')&&$('#alink').remove();location.hash='home'}
 else if(g('#ars')){if(rs){ALL.splice(0,ALL.length,...JSON.parse(JSON.stringify(P0)));S.tiles={};S.cats=DEFC.slice();S.colors={};S.nocol=[];S.bar=[];S.sg=[];S.pg={};barRun();Object.keys(COL).forEach(k=>delete COL[k]);Object.assign(COL,DEFCOL);rs=0;applyVis();adminPage();msg('Reset here. Press Save to site to put it live.')}else{rs=1;g('#ars').textContent='CLICK AGAIN TO CONFIRM'}}
@@ -531,7 +531,7 @@ for(const v of have)if(!want.has(v.color+'|'+v.size))await ok(sb.from('product_v
 const sbY=p.stockBy||{},fresh=combos.filter(x=>!hs.has(x.color+'|'+x.size)).map(x=>({...x,stock:sbY[x.size]!=null?sbY[x.size]:0}));if(fresh.length)await ok(sb.from('product_variants').insert(fresh));
 for(const z of Object.keys(sbY)){const sn=p.snap&&p.colors[0]?p.snap[p.colors[0]+'|'+z]:undefined;if(sbY[z]!=null&&(sn===undefined||sn!==sbY[z]))await ok(sb.from('product_variants').update({stock:sbY[z]}).eq('product_id',id).eq('size',z))}delete p.stockBy}
 await ok(sb.from('categories').delete().not('name','in',q(S.cats)));await ok(sb.from('colors').delete().not('name','in',q(Object.keys(COL))));
-await loadAll();adminPage();msg('Saved. The live store is updated.')}catch(e){msg('Could not save: '+(e.message||'check admin access')+'.')}}
+await loadAll();adminPage();msg('Saved. The live store is updated.');toast('Saved to the live store')}catch(e){msg('Could not save: '+(e.message||'check admin access')+'.');toast('Could not save. Nothing was changed on the live site.')}}
 window.addEventListener('hashchange',route);counts();app.innerHTML='<div class="empty"><p>Loading…</p></div>';boot();
 </script>
 </body></html>
